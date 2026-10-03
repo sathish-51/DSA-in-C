@@ -1,36 +1,39 @@
-#include<stdio.h>
+#include <stdio.h>
 
-void swap(int *a,int *b){
-    int t=*a;
-    *a=*b;
-    *b=t;
-}
+void insertionSort(int arr[], int n) {
+    int i, key, j;
+    for (i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
 
-void insertionSort(int n,int a[]){
-    for(int i=0;i<n-1;i++){
-            int flag = 0;
-        for(int j=0;j<n-i-1;j++){
-            if(a[j]>a[j+1]){
-                swap(&a[j],&a[j+1]);
-                flag=1;
-            }
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
         }
-        if(flag==0)return;  //flag is used for optimization
-    }    
+        
+        arr[j + 1] = key;
+    }
 }
 
-void print(int n,int a[]){
-    for(int i=0;i<n;i++){
-        printf("%3d",a[i]);
+int main() {
+    int arr[] = {12, 11, 13, 5, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Before sorting: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
     }
     printf("\n");
+
+    insertionSort(arr, n);
+
+    printf("After sorting: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
 }
 
-int main(){
-    int n=9;
-    int a[9] = {5,3,7,4,2,9,8,1,6};
-    insertionSort(n,a);
-    printf("Bubble sort: ");
-    print(n,a);
-  return 0;
-}
+
